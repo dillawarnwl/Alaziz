@@ -1,0 +1,68 @@
+{% extends 'partials/index.html' %}
+{% load static %}
+
+{% block title %}
+Health Tips
+{% endblock title %}
+
+{% block css %}
+{% endblock css %}
+
+{% block body %}
+<section class="bg-light pt-5" >
+    <div class="container" >
+        <div class="row">
+            <div class="col-lg-8 col-md-12 col-xl-8" >
+                <div class="block">
+                    <span class="text-uppercase text-sm letter-spacing">Stay Healthy with These Tips</span>
+                    <h1 class="mb-3 mt-3 read-more">Discover Useful Health Tips</h1>
+
+                    <p class="mb-4 pr-5">Take a look at these health tips to improve your well-being and maintain a
+                        healthy lifestyle.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-4 mt-2">
+                <div class="card shadow-sm">
+                    <img src="{% static 'assets/images/tips/tip1.jpg' %}" class="card-img-top" alt="Tip 1 Image">
+                    <div class="card-body">
+                        <h5 class="card-title read-more">Tip 1</h5>
+                        <p class="card-text">Include a variety of colorful vegetables and fruits in your diet for
+                            essential vitamins and minerals.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-4 mt-2">
+                <div class="card shadow-sm">
+                    <img src="{% static 'assets/images/tips/tip2.jpg' %}" class="card-img-top" alt="Tip 2 Image">
+                    <div class="card-body">
+                        <h5 class="card-title read-more">Tip 2</h5>
+                        <p class="card-text">Stay hydrated throughout the day by drinking an adequate amount of water.
+                            It helps maintain overall health.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-4 mt-2">
+                <div class="card shadow-sm">
+                    <img src="{% static 'assets/images/tips/tip3.jpg' %}" class="card-img-top" alt="Tip 3 Image">
+                    <div class="card-body">
+                        <h5 class="card-title read-more">Tip 3</h5>
+                        <p class="card-text">Engage in regular physical activity to keep your body and mind in good
+                            shape. Find activities you enjoy!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% block scripts %}
+{% endblock scripts %}
+{% endblock body %}

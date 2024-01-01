@@ -1,0 +1,29 @@
+{% extends 'partials/index.html' %}
+{% load static %}
+
+{% block title %}
+Login
+{% endblock title %}
+{% block css %}
+{% endblock css %}
+
+{% block body %}
+{% include "partials/messaging_info.html" %}
+<section class="section confirmation">
+	<div class="container">
+	  <div class="row justify-content-center">
+		<div class="col-lg-8">
+			<div class="confirmation-content text-center">
+			  <i class="icofont-check-circled text-lg text-color-2"></i>
+				<h2 class="mt-3 mb-4">Thank you for registering!</h2>
+				<p>Please check your email and follow the instructions to verify your account.</p>
+			</div>
+		</div>
+	  </div>
+	</div>
+  </section>
+  
+
+{% block scripts %}
+{% endblock scripts %}
+{% endblock body %}

@@ -1,0 +1,94 @@
+{% extends 'partials/index.html' %}
+{% load static %}
+
+{% block title %}
+HOME
+{% endblock title %}
+{% block css %}
+{% endblock css %}
+
+{% block body %}
+{% include "partials/messaging_info.html" %}
+<!-- Slider Start -->
+<section class="banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-12 col-xl-7">
+                <div class="block">
+<<<<<<< HEAD
+                    <!-- <div class="divider mb-3"></div> -->
+                    <!-- <span class="text-uppercase text-sm letter-spacing">Donate Blood, Save Lives</span> -->
+=======
+>>>>>>> 3bb02fd (v.1)
+                    <h1 class="mb-3 mt-3">Be a Lifesaver - Donate Blood Today</h1>
+
+                    <p class="mb-4 pr-5">Your blood donation can make a significant difference. Join us in our mission
+                        to save lives and give the gift of life to those in need.</p>
+                    <div class="btn-container">
+                        <a href="{% url 'register' %}" target="_blank"
+                            class="btn btn-main-2 btn-icon btn-round-full">Register as Donor<i
+                                class="icofont-simple-right ml-2"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<section class="features">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="feature-block d-lg-flex">
+                    <div class="feature-item mb-5 mb-lg-0">
+                        <div class="feature-icon mb-4">
+                            <i style="color: #e12454 !important;" class="icofont-blood-drop"></i>
+                        </div>
+                        <span>Donate Blood</span>
+                        <h4 class="mb-3">Be a Lifesaver</h4>
+                        <p class="mb-4">Your blood donation can save lives. Join us in our mission to provide
+                            life-saving blood to those in need.</p>
+                        <a href="{% url 'register' %}" class="btn btn-main btn-round-full">Register Now</a>
+                    </div>
+
+                    <div class="feature-item mb-5 mb-lg-0">
+                        <div class="feature-icon mb-4">
+                            <i style="color: #e12454 !important;" class="icofont-users"></i>
+                        </div>
+                        <span>Donor List</span>
+                        <h4 class="mb-3">Find Blood Donors</h4>
+                        <p class="mb-4">Explore our list of dedicated blood donors who are ready to make a difference.
+                            You can contact them if you need blood or want to join our noble cause.</p>
+                        <a href="{% url 'donorlist' %}" class="btn btn-main btn-round-full">View Donor List</a>
+                    </div>
+
+                    <div class="feature-item mb-5 mb-lg-0">
+                        <div class="feature-icon mb-4">
+                            <i style="color: #e12454 !important;" class="icofont-heartbeat"></i>
+                        </div>
+                        <span>Health Tips</span>
+                        <h4 class="mb-3">Stay Healthy, Save Lives</h4>
+<<<<<<< HEAD
+                        <p class="mb-4">In addition to donating blood, taking care of your health is crucial. Explore our health tips and information to ensure you stay healthy and continue making a positive impact on others' lives.</p>
+                        <a href="{% url 'healthtips' %}" class="btn btn-main btn-round-full">Explore Health Tips</a>
+                    </div>
+                    
+=======
+                        <p class="mb-4">In addition to donating blood, taking care of your health is crucial. Explore
+                            our health tips and information to ensure you stay healthy and continue making a positive
+                            impact on others' lives.</p>
+                        <a href="{% url 'healthtips' %}" class="btn btn-main btn-round-full">Explore Health Tips</a>
+                    </div>
+
+>>>>>>> 3bb02fd (v.1)
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Features End -->
+
+{% endblock body %}
+
+{% block scripts %}
+{% endblock scripts %}

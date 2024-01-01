@@ -1,0 +1,39 @@
+{% extends 'partials/index.html' %}
+{% load static %}
+
+{% block title %}
+Register as a Donor
+{% endblock title %}
+{% block css %}
+{% endblock css %}
+
+{% block body %}
+
+<section class="section donor-registration ">
+	<div class="container">
+		<div class="row">
+			{% include "partials/guidlines.html" %}
+			<div class="col-lg-6">
+				<div class="registration-wrap mt-1 mt-lg-0 pl-lg-5">
+					<h2 class="mb-2 title-color">Donor Registration Form</h2>
+					<p class="mb-4">Thank you for considering becoming a blood donor. Please fill out the registration
+						form below to get started.</p>
+					<form id="donor-registration-form" autocomplete="off" method="post" enctype="multipart/form-data" action="">
+						{% csrf_token %}
+						{{ form.non_field_errors }} <!-- Display non-field errors if any -->
+						{% for field in form %}
+						{{ field.label_tag }}
+						{{ field }}
+						{% endfor %}
+						<button id="submit-button" class="btn btn-main btn-round-full mt-3" type="submit">Confirm
+							<i class="icofont-simple-right ml-2"></i></button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock body %}
+
+{% block scripts %}
+{% endblock scripts %}

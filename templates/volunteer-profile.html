@@ -1,0 +1,69 @@
+{% extends 'partials/index.html' %}
+{% load static %}
+
+{% block title %}
+Donor Profile
+{% endblock title %}
+{% block css %}
+{% endblock css %}
+
+{% block body %}
+
+<<<<<<< HEAD
+<!-- <a href="{% url 'donorlist' %}" class="btn btn-primary btn-sm m-5">Back</a> -->
+=======
+>>>>>>> 3bb02fd (v.1)
+<section class="section ">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="">
+                    <img class="profile-image"
+                        src="{% if donor.img %}{{ donor.img.url }}{% else %}{% static 'assets/images/default.png' %}{% endif %}"
+                        alt="User Image">
+                    <div class="info-block mt-4">
+                        <h4 class="mb-0">{{ donor.fname }} {{ donor.lname }}</h4>
+                        <p>Blood Donor</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8 col-md-6">
+                <div class="donor-details mt-4 mt-lg-0">
+                    <div class="row">
+                        <div>
+                            <h2 class="text-md">About Me</h2>
+                        </div>
+                        <div class="ml-2">
+                            {% if user.is_authenticated %}
+                            {% if user == donor.user %}
+                            <a href="{% url 'update' donor.pk %}" class="btn btn-outline-secondary">
+                                <i class="icofont-edit icon-large"></i> 
+                            </a>
+                            <a href="{% url 'delete' donor.pk %}" class="btn btn-outline-danger">
+                                <i class="icofont-trash icon-large"></i> 
+                            </a>
+                            {% endif %}
+                            {% endif %}
+                        </div>
+
+                    </div>
+                    <div class="divider my-4"></div>
+                    <p><strong>Blood Group: </strong>{{ donor.bgroup }}</p>
+                    <p><strong>City: </strong>{{ donor.city }}</p>
+                    <p><strong>Age: </strong>{{ donor.dob }}</p>
+                    <p><strong>Phone#: </strong>{{ donor.phone }}</p>
+                    <p>{{ donor.more }}</p>
+
+                    <a href="tel:{{ donor.phone }}" class="btn btn-main-2 btn-round-full mt-3">
+                        Contact Me <i class="icofont-simple-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock body %}
+
+{% block scripts %}
+{% endblock scripts %}

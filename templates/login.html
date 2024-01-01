@@ -1,0 +1,50 @@
+{% extends 'partials/index.html' %}
+{% load static %}
+
+{% block title %}
+Login
+{% endblock title %}
+{% block css %}
+{% endblock css %}
+
+{% block body %}
+<section>
+    <form id="donor-registration-form" method="post" enctype="multipart/form-data" action="{% url 'login' %}">
+        {% csrf_token %}
+        {{ form.non_field_errors }} <!-- Display non-field errors if any -->
+        {{ form.errors }} <!-- Display form-level errors if any -->
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    {% include "partials/messaging_info.html" %}
+                    <div class="card">
+                        <div class="secondary-bg text-md text-white text-center">Login</div>
+                        <div class="card-body">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input name="email" id="email" type="email" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input name="password" id="password" type="password" class="form-control">
+                                </div>
+                            </div>
+                            <div class="btn-container">
+                                <p class="mb-4">New user? <a href="{% url 'signup' %}">SignUp</a></p>
+                                <button type="submit" class="btn btn-main btn-round-full">Login</button>
+                            </div>
+                            <div id="error-message" class="text-danger mt-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+
+{% block scripts %}
+{% endblock scripts %}
+{% endblock body %}
