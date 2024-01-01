@@ -11,11 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-<<<<<<< HEAD
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'donor.settings')
-
-application = get_wsgi_application()
-=======
 from whitenoise import WhiteNoise
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'donor.settings')
@@ -23,4 +18,3 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'donor.settings')
 application = get_wsgi_application()
 
 application = WhiteNoise(application, root='staticfiles')
->>>>>>> 3bb02fd (v.1)

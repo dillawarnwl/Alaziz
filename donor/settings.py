@@ -24,15 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-htsj7syy0supnf(58lr)084hha*#dy4ghirq1)^we6h8ldqy9i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-<<<<<<< HEAD
-DEBUG = True
-
-ALLOWED_HOSTS = []
-=======
 DEBUG = False
 
 ALLOWED_HOSTS = ['alaziz', 'localhost', '127.0.0.1']
->>>>>>> 3bb02fd (v.1)
 
 
 # Application definition
@@ -53,10 +47,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-<<<<<<< HEAD
-=======
     'whitenoise.middleware.WhiteNoiseMiddleware',
->>>>>>> 3bb02fd (v.1)
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -131,11 +122,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-<<<<<<< HEAD
-=======
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
->>>>>>> 3bb02fd (v.1)
 import os
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
