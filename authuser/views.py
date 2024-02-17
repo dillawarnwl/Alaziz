@@ -80,21 +80,26 @@ class UserSignUpView(View):
         return render(request, 'signup.html')
 
     def send_activation_email(self, request, user, to_email):
-        mail_subject = "Activate your Account"
-        message = render_to_string("template_activate_account.html", {
+        try:
+            mail_subject = "Activate your Account"
+            message = render_to_string("template_activate_account.html", {
             'user': user.username,
             'domain': get_current_site(request).domain,
             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
             'token': account_activation_token.make_token(user),
             "protocol": 'https' if request.is_secure() else 'http'
-        })
-        email = EmailMessage(mail_subject, message, to=[to_email])
-        if email.send():
-            messages.success(request, f'Dear <b>{user}</b>, please go to your email <b>{to_email}</b> inbox and click on \
-                the received activation link to confirm and complete the registration. <b>Note:</b> Check your spam folder.')
-        else:
-            messages.error(request, f'Problem sending email to {to_email}, check if you typed it correctly.')
-
+            })
+        
+            email = EmailMessage(mail_subject, message, to=[to_email])
+            email.content_subtype = 'html'
+            email.send()
+        
+            messages.success(request, f'Dear <b>Donor!</b>, please go to your email <b>{to_email}</b> inbox and click on the received activation link to confirm and complete the registration. <b>Note:</b> Check your spam folder.')
+    
+        except Exception as e:
+        
+            messages.error(request, f'There was a problem sending the activation email. Please try again later or contact support.{e}')
+ 
 
 class UserLogoutView(View):
     def get(self, request):

@@ -702,7 +702,8 @@ a:focus {
   box-shadow: 0px 0px 30px 0px rgba(0, 42, 106, 0.1);
 }
 .service-block img {
-  width: 100%;
+  width: 80%;
+  height: 230px;
   margin-top: -60px;
   border: 5px solid #223a66;
 }
@@ -1444,8 +1445,8 @@ a:focus {
 
 /* Style for the profile image */
 .profile-image {
-  width: 75%;
-  height: 75%;
+  width: 250px;
+  height: 250px;
   object-fit: cover; /* Resize image to cover the container */
   border: #e12454 10px solid;
   border-radius: 50%; /* Make the image round */

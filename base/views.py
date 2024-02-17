@@ -9,25 +9,32 @@ from django.contrib import messages
 from django.views.generic import CreateView, TemplateView, ListView
 from django.views.generic import CreateView, DetailView, UpdateView, ListView
 from django.views.generic.edit import DeleteView, FormView
-from .forms import RegisterForm, ContactForm
-from .models import DonorRegister
+from .forms import RegisterForm, ContactForm, OrganizationRegistrationForm
+from .models import DonorRegister, OrganizationRegister
 from django.db.models import Q
 from datetime import timedelta
 from django.utils import timezone
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger # for pagination
 
 
 class HomeView(TemplateView):
     template_name = "home.html"
+    model = OrganizationRegister
 
 class AboutView(TemplateView):
     template_name = "about.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['organizations'] = OrganizationRegister.objects.all()
+        return context
+
 
 
 class ContactView(FormView):
     template_name = 'contact.html'
     form_class = ContactForm
-    success_url = reverse_lazy('home')  
+    success_url = reverse_lazy('home')
 
     def form_valid(self, form):
         name = form.cleaned_data['name']
@@ -66,10 +73,28 @@ class RegisterView(CreateView):
     form_class = RegisterForm
 
     def form_valid(self, form):
+        # Check if donorid already exists
+        donorid = form.cleaned_data['donorid']
+        if DonorRegister.objects.filter(donorid=donorid).exists():
+            messages.error(self.request, 'Error: Donor ID already exists. Please choose a different Donor ID.')
+            return render(self.request, self.template_name, {'form': form})
+
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object.save()
         return redirect("donorlist")
+    
+@method_decorator(login_required(login_url=reverse_lazy('login')), name='dispatch')
+class OrganizationRegistrationView(CreateView):
+    model = OrganizationRegister
+    form_class = OrganizationRegistrationForm
+    template_name = 'register_organization.html'
+    success_url = reverse_lazy('about')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        # You can perform additional actions here if needed
+        return response
 
     
 class UpdateView(UpdateView):
@@ -93,7 +118,7 @@ class ProfileView(View):
             context = {'donor': donor}
             return render(request, self.template_name, context)
         except:
-            return redirect('register')
+            return redirect('register-donor')
         
 
     
@@ -109,10 +134,33 @@ class HealthTipsView(TemplateView):
     template_name = "health-tips.html"
 
 
+
 class DonorListView(ListView):
     template_name = "donor-list.html"
     model = DonorRegister
-    context_object_name = 'donors'  
+    context_object_name = 'donors'
+    paginate_by = 25  # Number of donors to display per page
+
+    def get_context_data(self, **kwargs):
+        context = super(DonorListView, self).get_context_data(**kwargs)
+        donors = context['donors']
+
+        # Paginate the donor list
+        paginator = Paginator(donors, self.paginate_by)
+        page = self.request.GET.get('page')
+
+        try:
+            donors = paginator.page(page)
+        except PageNotAnInteger:
+            # If the page is not an integer, deliver the first page.
+            donors = paginator.page(1)
+        except EmptyPage:
+            # If the page is out of range (e.g., 9999), deliver the last page.
+            donors = paginator.page(paginator.num_pages)
+
+        context['donors'] = donors
+        return context
+ 
 
     def get_queryset(self):
         name_or_city = self.request.GET.get('q', '')
@@ -124,27 +172,29 @@ class DonorListView(ListView):
             if name_or_city and blood_group:
                 queryset = DonorRegister.objects.filter(
                     Q(city__icontains=name_or_city) |
+                    Q(village__icontains=name_or_city) |
                     Q(fname__icontains=name_or_city) |
                     Q(lname__icontains=name_or_city),
                     Q(bgroup__icontains=blood_group),
-                    Q(ldonation__lte=timezone.now() - timedelta(days=56))
+                    Q(ldonation__lte=timezone.now() - timedelta(days=90))
                 ).order_by('-dob')
             else:
                 if name_or_city:
                     queryset = DonorRegister.objects.filter(
                         Q(city__icontains=name_or_city) |
+                        Q(village__icontains=name_or_city) |
                         Q(fname__icontains=name_or_city) |
                         Q(lname__icontains=name_or_city),
-                        Q(ldonation__lte=timezone.now() - timedelta(days=56))
+                        Q(ldonation__lte=timezone.now() - timedelta(days=90))
                     ).order_by('-dob')
                 else:
                     queryset = DonorRegister.objects.filter(
                         Q(bgroup__icontains=blood_group),
-                        Q(ldonation__lte=timezone.now() - timedelta(days=56))
+                        Q(ldonation__lte=timezone.now() - timedelta(days=90))
                     ).order_by('-dob')
         else:
             queryset = DonorRegister.objects.filter(
-                Q(ldonation__lte=timezone.now() - timedelta(days=56))
+                Q(ldonation__lte=timezone.now() - timedelta(days=90))
             ).order_by('-dob')
 
         return queryset

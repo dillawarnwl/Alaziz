@@ -22,12 +22,13 @@ Donor List
                         <label>
                             <input name="p" class="form-control me-2" type="search" value="{{ request.GET.p }}"
                                 placeholder="Blood Group">
-                        </label> 
+                        </label>
                         <br>
                         <button class="btn btn-outline-info" type="submit">Search</button>
-                        <a href="{% url 'donorlist' %}" class="btn btn-outline-secondary" role="button">Clear Filters</a>
+                        <a href="{% url 'donorlist' %}" class="btn btn-outline-secondary" role="button">Clear
+                            Filters</a>
                     </form>
-                    
+
                 </div>
             </div>
         </div>
@@ -40,17 +41,29 @@ Donor List
             {% for donor in donors %}
             <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="service-block mb-5">
-                    <div class="profile-image">
-                        <div class="donor-img">
-                            <a href="{% url 'donor-profile' donor.pk %}"><img src="{{ donor.img.url }}"
-                                    alt="donor-image" class="img-fluid rounded-circle"></a>
-                        </div>
+                    <div class="donor-img">
+                        <a href="{% url 'donor-profile' donor.pk %}">
+                            <img src="{{ donor.img.url }}" alt="donor-image" class="img-fluid rounded-circle">
+                        </a>
                     </div>
+                    {% if donor.organization %}
+                    <div class="organization-img">
+                        <img src="{{ donor.organization.org_logo.url }}" alt="organization-image"
+                            class="img-fluid rounded-circle" style="height: 85px; width: 85px;">
+                    </div>
+                    {% endif %}
+
                     <div class="content">
-                        <h4 class="mt-4 mb-2 title-color">{{ donor.fname }} {{ donor.lname }}</h4>
+                        <h4 class="mt-4 mb-2 title-color">{{ donor.fname }} {{ donor.lname }}
+                            {% if user.is_authenticated and user == donor.user %}
+                            <a href="{% url 'update' donor.pk %}">
+                                <i class="icofont-edit icon-large float-right"></i>
+                            </a>
+                            {% endif %}
+                        </h4>
                         <p class="mb-2"><strong>Blood Group:</strong> {{ donor.bgroup }}</p>
                         <p><strong>Age:</strong> {{ donor.dob|timesince }}</p>
-                        <p><strong>City:</strong> {{ donor.city }}</p>
+                        <p><strong>Address:</strong> {{ donor.village }}, {{ donor.city}}</p>
                     </div>
                 </div>
             </div>
@@ -58,6 +71,24 @@ Donor List
         </div>
     </div>
 </section>
+<div class="pagination justify-content-center">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+        <a class="btn btn-main-2 btn-round-full" href="?page={{ page_obj.previous_page_number }}"><i
+                class="icofont-rounded-double-left"></i></a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+        <a class="btn btn-main-2 btn-round-full" href="?page={{ page_obj.next_page_number }}"><i
+                class="icofont-rounded-double-right"></i></a>
+        {% endif %}
+    </span>
+</div>
+
 {% block scripts %}
 {% endblock scripts %}
 {% endblock body %}

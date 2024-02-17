@@ -9,10 +9,6 @@ Donor Profile
 
 {% block body %}
 
-<<<<<<< HEAD
-<!-- <a href="{% url 'donorlist' %}" class="btn btn-primary btn-sm m-5">Back</a> -->
-=======
->>>>>>> 3bb02fd (v.1)
 <section class="section ">
     <div class="container">
         <div class="row">
@@ -37,12 +33,7 @@ Donor Profile
                         <div class="ml-2">
                             {% if user.is_authenticated %}
                             {% if user == donor.user %}
-                            <a href="{% url 'update' donor.pk %}" class="btn btn-outline-secondary">
-                                <i class="icofont-edit icon-large"></i> 
-                            </a>
-                            <a href="{% url 'delete' donor.pk %}" class="btn btn-outline-danger">
-                                <i class="icofont-trash icon-large"></i> 
-                            </a>
+                            <a href="{% url 'delete' donor.pk %}" class=" mr-4"><i class="icofont-trash icon-large"></i></a>
                             {% endif %}
                             {% endif %}
                         </div>
@@ -50,9 +41,8 @@ Donor Profile
                     </div>
                     <div class="divider my-4"></div>
                     <p><strong>Blood Group: </strong>{{ donor.bgroup }}</p>
-                    <p><strong>City: </strong>{{ donor.city }}</p>
-                    <p><strong>Age: </strong>{{ donor.dob }}</p>
-                    <p><strong>Phone#: </strong>{{ donor.phone }}</p>
+                    <p><strong>Address: </strong>{{ donor.village }}, {{ donor.city }}</p>
+                    <p><strong>Age: </strong>{{ donor.dob|timesince }}</p>
                     <p>{{ donor.more }}</p>
 
                     <a href="tel:{{ donor.phone }}" class="btn btn-main-2 btn-round-full mt-3">

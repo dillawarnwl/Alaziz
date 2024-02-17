@@ -15,19 +15,17 @@ HOME
         <div class="row">
             <div class="col-lg-6 col-md-12 col-xl-7">
                 <div class="block">
-<<<<<<< HEAD
-                    <!-- <div class="divider mb-3"></div> -->
-                    <!-- <span class="text-uppercase text-sm letter-spacing">Donate Blood, Save Lives</span> -->
-=======
->>>>>>> 3bb02fd (v.1)
                     <h1 class="mb-3 mt-3">Be a Lifesaver - Donate Blood Today</h1>
 
                     <p class="mb-4 pr-5">Your blood donation can make a significant difference. Join us in our mission
                         to save lives and give the gift of life to those in need.</p>
                     <div class="btn-container">
-                        <a href="{% url 'register' %}" target="_blank"
+                        <a href="{% url 'register-donor' %}" target="_blank"
                             class="btn btn-main-2 btn-icon btn-round-full">Register as Donor<i
                                 class="icofont-simple-right ml-2"></i></a>
+                        <a href="{% url 'register-organization' %}" target="_blank"
+                            class="btn btn-main-2 btn-icon btn-round-full m-2">Register Community<i
+                            class="icofont-simple-right ml-2"></i></a>
                     </div>
                 </div>
             </div>
@@ -48,7 +46,7 @@ HOME
                         <h4 class="mb-3">Be a Lifesaver</h4>
                         <p class="mb-4">Your blood donation can save lives. Join us in our mission to provide
                             life-saving blood to those in need.</p>
-                        <a href="{% url 'register' %}" class="btn btn-main btn-round-full">Register Now</a>
+                        <a href="{% url 'register-donor' %}" class="btn btn-main btn-round-full">Register Now</a>
                     </div>
 
                     <div class="feature-item mb-5 mb-lg-0">
@@ -68,26 +66,18 @@ HOME
                         </div>
                         <span>Health Tips</span>
                         <h4 class="mb-3">Stay Healthy, Save Lives</h4>
-<<<<<<< HEAD
-                        <p class="mb-4">In addition to donating blood, taking care of your health is crucial. Explore our health tips and information to ensure you stay healthy and continue making a positive impact on others' lives.</p>
-                        <a href="{% url 'healthtips' %}" class="btn btn-main btn-round-full">Explore Health Tips</a>
-                    </div>
-                    
-=======
                         <p class="mb-4">In addition to donating blood, taking care of your health is crucial. Explore
                             our health tips and information to ensure you stay healthy and continue making a positive
                             impact on others' lives.</p>
                         <a href="{% url 'healthtips' %}" class="btn btn-main btn-round-full">Explore Health Tips</a>
                     </div>
 
->>>>>>> 3bb02fd (v.1)
                 </div>
             </div>
         </div>
     </div>
 </section>
 <!-- Features End -->
-
 {% endblock body %}
 
 {% block scripts %}

@@ -8,30 +8,54 @@ Register as a Donor
 {% endblock css %}
 
 {% block body %}
+{% include "partials/messaging_info.html" %}
 
-<section class="section donor-registration ">
-	<div class="container">
-		<div class="row">
-			{% include "partials/guidlines.html" %}
-			<div class="col-lg-6">
-				<div class="registration-wrap mt-1 mt-lg-0 pl-lg-5">
-					<h2 class="mb-2 title-color">Donor Registration Form</h2>
-					<p class="mb-4">Thank you for considering becoming a blood donor. Please fill out the registration
-						form below to get started.</p>
-					<form id="donor-registration-form" autocomplete="off" method="post" enctype="multipart/form-data" action="">
-						{% csrf_token %}
-						{{ form.non_field_errors }} <!-- Display non-field errors if any -->
-						{% for field in form %}
-						{{ field.label_tag }}
-						{{ field }}
-						{% endfor %}
-						<button id="submit-button" class="btn btn-main btn-round-full mt-3" type="submit">Confirm
-							<i class="icofont-simple-right ml-2"></i></button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+<section class="section donor-registration">
+    <div class="container">
+        <div class="row">
+            {% include "partials/guidlines.html" %}
+            <div class="col-lg-5">
+                <div class="registration-wrap mt-1 mt-lg-0 pl-lg-5">
+                    <h2 class="mb-2 title-color">Donor Registration Form</h2>
+                    <p class="mb-4">Thank you for considering becoming a blood donor. Please fill out the registration
+                        form below to get started.</p>
+                    <form id="donor-registration-form" autocomplete="off" method="post" enctype="multipart/form-data"
+                        action="">
+                        {% csrf_token %}
+
+                        {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {{ form.non_field_errors }}
+                        </div>
+                        {% endif %}
+
+                        {% for field in form %}
+                        <div class="form-group">
+                            {{ field.label_tag }}
+                            {% if field.name == 'phone' %}
+                            <small class="form-text text-danger ">Note: Females should put their guardian
+                                number.</small>
+                            {% endif %}
+                            {{ field }}
+                            {% if field.name == 'certification' %}
+                            <small>I hereby certify that I have read <strong>eligibility criteria and the information</strong> provided
+                                by me is correct and I will be liable for legal action if found false or forged.</small>
+                            {% endif %}
+                            {% if field.errors %}
+                            <div class="text-danger">
+                                {{ field.errors|join:", " }}
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+
+                        <button id="submit-button" class="btn btn-main btn-round-full mt-3" type="submit">Confirm
+                            <i class="icofont-simple-right ml-2"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 {% endblock body %}
 
